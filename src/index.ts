@@ -9,6 +9,7 @@ const PORT = 8000;
 
 const server = http.createServer((req, res) => {
   const { method, url } = req;
+
   switch (true) {
     case method === 'GET' && url === '/api/users':
       getUsers(req, res);
@@ -25,6 +26,9 @@ const server = http.createServer((req, res) => {
     case method === 'DELETE' && url?.startsWith('/api/users/'):
       deleteUser(req, res);
       break;
+    default:
+      res.writeHead(404, { 'Content-type': 'application/json' });
+      res.end(JSON.stringify({ message: 'Invalid endpoint' }));
   }
 });
 

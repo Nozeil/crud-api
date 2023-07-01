@@ -2,7 +2,7 @@ export interface User {
   id: string;
   username: string;
   age: number;
-  hobbies: string[] | [];
+  hobbies: string[] | never[];
 }
 
 type Users = User[];
