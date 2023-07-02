@@ -11,7 +11,7 @@ export const updateUser: RequestListener = (req, res) => {
     const uuid = url.slice('/api/users/'.length);
 
     if (!isUUID(uuid)) {
-      res.writeHead(400, { 'Content-type': 'application/json' });
+      res.statusCode = 400;
       res.end(JSON.stringify({ message: 'Invalid id' }));
       return;
     }
@@ -28,15 +28,15 @@ export const updateUser: RequestListener = (req, res) => {
 
           if (isValid) {
             const user = updateUserInDb(data, userIndex);
-            res.writeHead(200, { 'Content-type': 'application/json' });
+            res.statusCode = 200;
             res.end(JSON.stringify(user));
           } else {
-            res.writeHead(400, { 'Content-type': 'application/json' });
+            res.statusCode = 400;
             res.end(JSON.stringify({ message: 'Invalid request body' }));
           }
         });
     } else {
-      res.writeHead(404, { 'Content-type': 'application/json' });
+      res.statusCode = 404;
       res.end(JSON.stringify({ message: 'User with this id does not exist' }));
     }
   }

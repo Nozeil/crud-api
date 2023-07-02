@@ -9,6 +9,7 @@ const PORT = 8000;
 
 const server = http.createServer((req, res) => {
   const { method, url } = req;
+  res.setHeader('Content-type', 'application/json');
 
   switch (true) {
     case method === 'GET' && url === '/api/users':
@@ -27,7 +28,7 @@ const server = http.createServer((req, res) => {
       deleteUser(req, res);
       break;
     default:
-      res.writeHead(404, { 'Content-type': 'application/json' });
+      res.statusCode = 404;
       res.end(JSON.stringify({ message: 'Invalid endpoint' }));
   }
 });

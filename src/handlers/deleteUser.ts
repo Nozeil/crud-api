@@ -9,7 +9,7 @@ export const deleteUser: RequestListener = (req, res) => {
     const uuid = url.slice('/api/users/'.length);
 
     if (!isUUID(uuid)) {
-      res.writeHead(400, { 'Content-type': 'application/json' });
+      res.statusCode = 400;
       res.end(JSON.stringify({ message: 'Invalid id' }));
       return;
     }
@@ -18,10 +18,10 @@ export const deleteUser: RequestListener = (req, res) => {
 
     if (userIndex >= 0) {
       db.splice(userIndex, 1);
-      res.writeHead(204, { 'Content-type': 'application/json' });
+      res.statusCode = 204;
       res.end();
     } else {
-      res.writeHead(404, { 'Content-type': 'application/json' });
+      res.statusCode = 404;
       res.end(JSON.stringify({ message: 'User with this id does not exist' }));
     }
   }

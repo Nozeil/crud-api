@@ -13,10 +13,10 @@ export const createUser: RequestListener = (req, res) => {
 
       if (isValid) {
         const user = addUserToDb(data);
-        res.writeHead(201, { 'Content-type': 'application/json' });
+        res.statusCode = 201;
         res.end(JSON.stringify(user));
       } else {
-        res.writeHead(400, { 'Content-type': 'application/json' });
+        res.statusCode = 400;
         res.end(JSON.stringify({ message: 'Invalid request body' }));
       }
     });
