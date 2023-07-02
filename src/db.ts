@@ -5,6 +5,6 @@ export interface User {
   hobbies: string[] | never[];
 }
 
-type Users = User[];
+export type Users = User[];
 
 export const db: Users = [];
