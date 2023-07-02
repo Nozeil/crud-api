@@ -4,8 +4,9 @@ import { getUsers } from './handlers/getUsers';
 import { getUser } from './handlers/getUser';
 import { updateUser } from './handlers/updateUser';
 import { deleteUser } from './handlers/deleteUser';
+import 'dotenv/config';
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 const server = http.createServer((req, res) => {
   new Promise((_, reject) => {
@@ -40,7 +41,6 @@ const server = http.createServer((req, res) => {
         res.statusCode = 404;
         res.end(JSON.stringify({ message: 'Invalid endpoint' }));
     }
-    res.end();
   } catch (e) {
     res.statusCode = 500;
     res.end(JSON.stringify({ message: STATUS_CODES[500] }));
